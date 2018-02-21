@@ -33,16 +33,16 @@ public class JsonUtils {
                         obj.has(DESCRIPTION_KEY) &&
                         obj.has(IMAGE_KEY)) {
                     sandwich = new Sandwich();
-                    sandwich.setMainName(nameObject.getString(MAIN_NAME_KEY));
-                    sandwich.setPlaceOfOrigin(obj.getString(PLACE_ORIGIN_KEY));
-                    sandwich.setDescription(obj.getString(DESCRIPTION_KEY));
-                    sandwich.setImage(obj.getString(IMAGE_KEY));
+                    sandwich.setMainName(nameObject.optString(MAIN_NAME_KEY));
+                    sandwich.setPlaceOfOrigin(obj.optString(PLACE_ORIGIN_KEY));
+                    sandwich.setDescription(obj.optString(DESCRIPTION_KEY));
+                    sandwich.setImage(obj.optString(IMAGE_KEY));
 
                     if (nameObject.has(ALSO_KNOWN_AS_KEY)) {
                         JSONArray alsoKnownAsArray = nameObject.getJSONArray(ALSO_KNOWN_AS_KEY);
                         List<String> parsedAlsoArray = new ArrayList<>();
                         for (int i = 0; i < alsoKnownAsArray.length(); i++) {
-                            parsedAlsoArray.add(alsoKnownAsArray.getString(i));
+                            parsedAlsoArray.add(alsoKnownAsArray.optString(i));
                         }
                         sandwich.setAlsoKnownAs(parsedAlsoArray);
                     }
@@ -51,7 +51,7 @@ public class JsonUtils {
                         JSONArray ingredientsAray = obj.getJSONArray(INGREDIENTS_KEY);
                         List<String> parsedIngredArray = new ArrayList<>();
                         for (int i = 0; i < ingredientsAray.length(); i++) {
-                            parsedIngredArray.add(ingredientsAray.getString(i));
+                            parsedIngredArray.add(ingredientsAray.optString(i));
                         }
                         sandwich.setIngredients(parsedIngredArray);
                     }
